@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Zahra Heydari — Product Designer & Portfolio</title>
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg: #08090a;
+      --card-bg: rgba(255, 255, 255, 0.03);
+      --border: rgba(255, 255, 255, 0.08);
+      --accent-purple: #8b5cf6;
+      --accent-blue: #38bdf8;
+      --text: #f3f4f6;
+      --text-muted: #9ca3af;
+      --font: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font);
+      min-height: 100vh;
+      overflow-x: hidden;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Ambient background glow */
+    .ambient-glow {
+      position: fixed;
+      top: -150px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80vw;
+      max-width: 900px;
+      height: 450px;
+      background: radial-gradient(circle, rgba(139, 92, 246, 0.18) 0%, rgba(56, 189, 248, 0.08) 40%, transparent 75%);
+      filter: blur(80px);
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    /* Navbar */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(8, 9, 10, 0.75);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-container {
+      max-width: 1300px;
+      margin: 0 auto;
+      padding: 1.1rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      font-weight: 800;
+      font-size: 1.25rem;
+      letter-spacing: -0.03em;
+      color: #fff;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .logo-badge {
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      padding: 0.2rem 0.5rem;
+      background: rgba(139, 92, 246, 0.2);
+      border: 1px solid rgba(139, 92, 246, 0.4);
+      border-radius: 999px;
+      color: #c4b5fd;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 500;
+      transition: color 0.2s ease;
+    }
+
+    .nav-links a:hover {
+      color: #fff;
+    }
+
+    .nav-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.55rem 1.1rem;
+      background: rgba(255, 255, 255, 0.07);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      color: #fff;
+      text-decoration: none;
+      font-size: 0.88rem;
+      font-weight: 600;
+      transition: all 0.25s ease;
+    }
+
+    .nav-cta:hover {
+      background: rgba(255, 255, 255, 0.15);
+      border-color: rgba(255, 255, 255, 0.25);
+    }
+
+    /* Hero Section (Two-Column Layout) */
+    .hero-section {
+      position: relative;
+      z-index: 1;
+      max-width: 1300px;
+      margin: 0 auto;
+      padding: 5rem 1.5rem 6rem;
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      align-items: center;
+      gap: 3.5rem;
+      min-height: calc(85vh - 70px);
+    }
+
+    .hero-content {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1.5rem;
+    }
+
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.4rem 0.9rem;
+      background: rgba(34, 197, 94, 0.1);
+      border: 1px solid rgba(34, 197, 94, 0.25);
+      border-radius: 999px;
+      font-size: 0.82rem;
+      color: #4ade80;
+      font-weight: 500;
+    }
+
+    .status-dot {
+      width: 7px;
+      height: 7px;
+      background-color: #22c55e;
+      border-radius: 50%;
+      box-shadow: 0 0 10px #22c55e;
+      animation: pulse 2s infinite ease-in-out;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.8); }
+    }
+
+    .hero-title {
+      font-size: clamp(2.4rem, 5.5vw, 4.4rem);
+      font-weight: 900;
+      line-height: 1.08;
+      letter-spacing: -0.04em;
+      text-transform: uppercase;
+    }
+
+    .hero-title .hollow-text {
+      color: transparent;
+      -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.65);
+      transition: all 0.3s ease;
+      display: block;
+      background: linear-gradient(135deg, #fff 0%, #a78bfa 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-subtitle {
+      font-size: 1.1rem;
+      color: var(--text-muted);
+      max-width: 520px;
+      line-height: 1.7;
+    }
+
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-top: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .primary-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.85rem 1.8rem;
+      background: #ffffff;
+      color: #08090a;
+      border-radius: 999px;
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 700;
+      transition: all 0.25s ease;
+      box-shadow: 0 4px 20px rgba(255, 255, 255, 0.15);
+    }
+
+    .primary-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(255, 255, 255, 0.3);
+      background: #f8fafc;
+    }
+
+    .secondary-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.85rem 1.6rem;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      color: #fff;
+      border-radius: 999px;
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 600;
+      transition: all 0.25s ease;
+    }
+
+    .secondary-btn:hover {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    /* 3D Floating Avatar Container */
+    .avatar-wrapper {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      perspective: 1000px;
+    }
+
+    .avatar-tilt-card {
+      position: relative;
+      width: min(380px, 85vw);
+      height: min(380px, 85vw);
+      border-radius: 50%;
+      padding: 10px;
+      background: linear-gradient(135deg, rgba(139, 92, 246, 0.3), rgba(56, 189, 248, 0.2));
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6),
+                  0 0 50px rgba(139, 92, 246, 0.25);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      animation: floatMotion 6s ease-in-out infinite;
+      transition: transform 0.15s ease-out, box-shadow 0.3s ease;
+      will-change: transform;
+    }
+
+    @keyframes floatMotion {
+      0%, 100% {
+        transform: translateY(0px) rotate(0deg);
+      }
+      50% {
+        transform: translateY(-14px) rotate(1deg);
+      }
+    }
+
+    .avatar-glow-ring {
+      position: absolute;
+      inset: -4px;
+      border-radius: 50%;
+      background: conic-gradient(from 180deg at 50% 50%, #8b5cf6, #38bdf8, #ec4899, #8b5cf6);
+      z-index: -1;
+      filter: blur(12px);
+      opacity: 0.7;
+    }
+
+    .avatar-img-box {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      overflow: hidden;
+      background: #111317;
+      border: 3px solid rgba(255, 255, 255, 0.15);
+      position: relative;
+    }
+
+    .avatar-img-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+
+    .avatar-wrapper:hover .avatar-img-box img {
+      transform: scale(1.04);
+    }
+
+    /* Floating skill badge on avatar */
+    .floating-badge {
+      position: absolute;
+      bottom: 12px;
+      right: 12px;
+      background: rgba(15, 17, 21, 0.85);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      padding: 0.55rem 1rem;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+    }
+
+    .floating-badge-icon {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #8b5cf6;
+    }
+
+    /* Grid & Info Section */
+    .middle-grid {
+      max-width: 1300px;
+      margin: 0 auto;
+      padding: 4rem 1.5rem;
+      border-top: 1px solid var(--border);
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2.5rem;
+    }
+
+    .grid-col h3 {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-muted);
+      margin-bottom: 1.2rem;
+    }
+
+    .grid-col ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .grid-col a {
+      color: #e5e7eb;
+      text-decoration: none;
+      font-size: 1rem;
+      font-weight: 500;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .grid-col a:hover {
+      color: #fff;
+      transform: translateX(4px);
+    }
+
+    .clock-display {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 1.1rem;
+      color: #a78bfa;
+      background: rgba(139, 92, 246, 0.08);
+      padding: 0.6rem 0.9rem;
+      border-radius: 8px;
+      border: 1px solid rgba(139, 92, 246, 0.2);
+      display: inline-block;
+      margin-top: 0.5rem;
+    }
+
+    /* Footer */
+    footer {
+      max-width: 1300px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem 3rem;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: var(--text-muted);
+      font-size: 0.88rem;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .back-to-top {
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .back-to-top:hover {
+      color: #fff;
+    }
+
+    /* Mobile Responsive */
+    @media (max-width: 960px) {
+      .hero-section {
+        grid-template-columns: 1fr;
+        text-align: center;
+        padding: 3rem 1.5rem 4rem;
+        gap: 3rem;
+      }
+
+      .hero-content {
+        align-items: center;
+      }
+
+      .hero-actions {
+        justify-content: center;
+      }
+
+      .avatar-wrapper {
+        order: -1;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="ambient-glow"></div>
+
+  <!-- Header -->
+  <header>
+    <div class="nav-container">
+      <a href="#" class="logo">
+        ZH®
+        <span class="logo-badge">DESIGN</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="#works">Works (03)</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#process">Process</a></li>
+        <li><a href="#resume">Resume</a></li>
+      </ul>
+      <a href="mailto:zahra.design@gmail.com" class="nav-cta">Let's Talk ↗</a>
+    </div>
+  </header>
+
+  <!-- Main Hero Section -->
+  <main>
+    <section class="hero-section">
+      <!-- Left Column: Content -->
+      <div class="hero-content">
+        <div class="status-badge">
+          <span class="status-dot"></span>
+          Available for Q2/Q3 Projects
+        </div>
+
+        <h1 class="hero-title">
+          WELCOME TO
+          <span class="hollow-text">ZAHRA’S PORTFOLIO</span>
+        </h1>
+
+        <p class="hero-subtitle">
+          Product Designer & UX Strategist crafting clean, interactive, and human-centered digital experiences.
+        </p>
+
+        <div class="hero-actions">
+          <a href="mailto:zahra.design@gmail.com" class="primary-btn">
+            Get in touch ↗
+          </a>
+          <a href="#works" class="secondary-btn">
+            View selected work
+          </a>
+        </div>
+      </div>
+
+      <!-- Right Column: Interactive 3D Glow Avatar -->
+      <div class="avatar-wrapper" id="avatarContainer">
+        <div class="avatar-tilt-card" id="tiltCard">
+          <div class="avatar-glow-ring"></div>
+          <div class="avatar-img-box">
+            <!-- برای استفاده از عکستان کافیست فایل عکس خود را به نام avatar.png در کنار این فایل قرار دهید -->
+            <img 
+              id="avatarImg"
+              src="avatar.png" 
+              alt="Zahra Heydari"
+              onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=800&q=80';"
+            />
+          </div>
+          <div class="floating-badge">
+            <span class="floating-badge-icon"></span>
+            UI/UX & Product Design
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Info Grid -->
+    <section class="middle-grid">
+      <div class="grid-col">
+        <h3>Navigation</h3>
+        <ul>
+          <li><a href="#works">Selected Works (03) ↗</a></li>
+          <li><a href="#about">About & Background ↗</a></li>
+          <li><a href="#resume">Interactive Resume ↗</a></li>
+        </ul>
+      </div>
+
+      <div class="grid-col">
+        <h3>Social / Networks</h3>
+        <ul>
+          <li><a href="https://linkedin.com" target="_blank" rel="noreferrer">LinkedIn ↗</a></li>
+          <li><a href="https://dribbble.com" target="_blank" rel="noreferrer">Dribbble ↗</a></li>
+          <li><a href="https://figma.com" target="_blank" rel="noreferrer">Figma Community ↗</a></li>
+        </ul>
+      </div>
+
+      <div class="grid-col">
+        <h3>Location & Local Time</h3>
+        <p style="color: var(--text-muted); font-size: 0.95rem;">Isfahan, Iran</p>
+        <div class="clock-display" id="localClock">--:--:-- IRST</div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div>© 2026 Zahra Heydari — Product Designer & Creative Developer</div>
+    <a href="#" class="back-to-top">Back to top ↑</a>
+  </footer>
+
+  <!-- Scripts -->
+  <script>
+    // Live Iran Clock
+    function updateClock() {
+      const options = {
+        timeZone: 'Asia/Tehran',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        hour12: false
+      };
+      const now = new Date();
+      const timeString = new Intl.DateTimeFormat('en-GB', options).format(now);
+      const clockEl = document.getElementById('localClock');
+      if (clockEl) {
+        clockEl.textContent = `${timeString} IRST (UTC+3:30)`;
+      }
+    }
+    setInterval(updateClock, 1000);
+    updateClock();
+
+    // 3D Parallax Tilt Effect on Mouse Move
+    const avatarContainer = document.getElementById('avatarContainer');
+    const tiltCard = document.getElementById('tiltCard');
+
+    if (avatarContainer && tiltCard) {
+      window.addEventListener('mousemove', (e) => {
+        const rect = tiltCard.getBoundingClientRect();
+        const cardCenterX = rect.left + rect.width / 2;
+        const cardCenterY = rect.top + rect.height / 2;
+
+        const deltaX = (e.clientX - cardCenterX) / 25;
+        const deltaY = (e.clientY - cardCenterY) / 25;
+
+        // Apply smooth 3D tilt constraint
+        const rotateX = Math.max(Math.min(-deltaY, 15), -15);
+        const rotateY = Math.max(Math.min(deltaX, 15), -15);
+
+        tiltCard.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+      });
+
+      // Reset on leave window
+      document.addEventListener('mouseleave', () => {
+        tiltCard.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg)`;
+      });
+    }
+  </script>
+</body>
+</html>
